@@ -20,11 +20,11 @@ def in_range(val,low,high):
 
 letter_ranges = {
     "A": {
-        "index": (20,45),
+        "index": (15,45),
         "middle": (10,40),
         "ring": (3,30),
         "pinky": (0,25),
-        "thumb": (0.068,0.18)
+        "thumb": (0.09,0.18)
     },
     "B": {
         "index": (170,180),
@@ -52,7 +52,21 @@ letter_ranges = {
         "middle": (15,32),
         "ring": (5,28),
         "pinky": (10,36),
-        "thumb": (0.07,0.13)
+        "thumb": (0.06,0.095)
+    },
+    "F": {
+        "index": (58,160),
+        "middle": (155,180),
+        "ring": (155,180),
+        "pinky": (155,180),
+        "thumb": (0.07,0.125)
+    },
+    "G": {
+        "index": (160,180),
+        "middle": (0,60),
+        "ring": (25,70),
+        "pinky": (30,110),
+        "thumb": (0.028,0.15)
     }
 }
 

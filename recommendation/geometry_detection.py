@@ -20,18 +20,39 @@ def in_range(val,low,high):
 
 letter_ranges = {
     "A": {
-        "index": (25,45),
-        "middle": (20,40),
-        "ring": (10,30),
-        "pinky": (0,20),
-        "thumb": (0.075,0.18)
+        "index": (20,45),
+        "middle": (10,40),
+        "ring": (3,30),
+        "pinky": (0,25),
+        "thumb": (0.068,0.18)
     },
     "B": {
-        "index": (160,180),
-        "middle": (160,180),
-        "ring": (160,180),
-        "pinky": (160,180),
-        "thumb": (0.045,0.08)
+        "index": (170,180),
+        "middle": (170,180),
+        "ring": (170,180),
+        "pinky": (170,180),
+        "thumb": (0.05,0.07)
+    },
+    "C": {
+        "index": (85,135),
+        "middle": (60,120),
+        "ring": (50,120),
+        "pinky": (90,145),
+        "thumb": (0.07,0.16)
+    },
+    "D": {
+        "index": (168,180),
+        "middle": (30,55),
+        "ring": (20,100),
+        "pinky": (5,50),
+        "thumb": (0.06,0.16)
+    },
+    "E": {
+        "index": (28,50),
+        "middle": (15,32),
+        "ring": (5,28),
+        "pinky": (10,36),
+        "thumb": (0.07,0.13)
     }
 }
 
@@ -102,7 +123,7 @@ with mp_hands.Hands(min_detection_confidence=0.8,min_tracking_confidence=0.5,max
                 prediction = "Unknown"
 
                 for letter, ranges in letter_ranges.items():
-                   if all(in_range(angles[k], *ranges[k]) for k in ranges):
+                   if all(in_range(angles[k], *ranges[k]) for k in ranges):    #in_range(angles[k], ranges[k][0], ranges[k][1])
                      prediction = letter
                      break
 

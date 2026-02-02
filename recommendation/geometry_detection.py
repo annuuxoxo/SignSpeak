@@ -103,8 +103,8 @@ with mp_hands.Hands(min_detection_confidence=0.8,min_tracking_confidence=0.5,max
 
                 for letter, ranges in letter_ranges.items():
                    if all(in_range(angles[k], *ranges[k]) for k in ranges):
-                    prediction = letter
-                    break
+                     prediction = letter
+                     break
 
 
         if angles:

@@ -9,7 +9,7 @@
 
   Run `npm run dev` to start the development server.
 
-  ##Contributors
+  ## Contributors
   
 - [Anushree Upasham](https://github.com/annuuxoxo)
 - [Sofia Abidi](https://github.com/sofiaabidi)

@@ -103,13 +103,13 @@ letter_ranges = {
     "pinky": (25, 80),
     "thumb": (0.085, 0.30)
     },
-    "M": {
-    "index": (35, 75),
-    "middle": (30, 95),
-    "ring": (25, 80),
-    "pinky": (20,70),
-    "thumb": (0.06, 0.16),
-    "tm_dist":(0.18,0.35)
+    "M": { 
+    "index": (80,120),
+    "middle": (110,160),  
+    "ring": (125, 155),  # m and n still need attention
+    "pinky": (130,160),
+    "thumb": (0.08, 0.15),
+    "tm_dist":(0.2,0.48)
     },
     "N": {
     "index": (40, 80),
@@ -125,6 +125,34 @@ letter_ranges = {
     "pinky": (80, 140),
     "thumb": (0.09, 0.20),
     "ti_dist": (0.015, 0.085)
+    },
+    "R": {
+    "index": (160, 180),
+    "middle": (160, 175),
+    "ring": (40, 90),
+    "pinky": (45, 110),
+    "thumb": (0.085, 0.135)
+    },
+    "W": {
+    "index": (170,180),
+    "middle": (170,180),
+    "ring": (170,180),
+    "pinky": (28, 125),
+    "thumb": (0.085, 0.17)
+    },
+    "X": {
+    "index": (45,110),
+    "middle": (50,110),
+    "ring": (40,115),
+    "pinky": (45, 115),
+    "thumb": (0.06, 0.4)
+    },
+    "Y": {
+    "index": (30,70),
+    "middle": (35,85),
+    "ring": (35, 80),
+    "pinky": (160, 180),
+    "thumb": (0.09, 0.145)
     }
 
 }
@@ -196,7 +224,6 @@ with mp_hands.Hands(
                 tm_dist = get_distance(thumb_tip, middle_tip)
                 thumb_dist = get_distance(thumb_tip, index_mcp)
                 thumb_dx = lm[4].x - lm[5].x
-
                 index_dx = lm[8].x - lm[5].x   #for distinguishing horizontal and vertical direction
                 index_dy = lm[8].y - lm[5].y
 

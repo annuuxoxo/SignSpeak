@@ -66,17 +66,23 @@ with mp_hands.Hands(min_detection_confidence=0.8,min_tracking_confidence=0.5,max
             thumb_tip=np.array([lm[4].x,lm[4].y,lm[4].z])
             index_mcp=np.array([lm[5].x,lm[5].y,lm[5].z])
             thumb_dist=get_distance(thumb_tip,index_mcp)   # (thumb tip to index MCP)
+            index_tip = np.array([lm[8].x, lm[8].y, lm[8].z])
+            middle_tip = np.array([lm[12].x, lm[12].y, lm[12].z])
+            im_dist = get_distance(index_tip, thumb_tip)
+
 
             key=cv2.waitKey(10)&0xFF # Wait for a key press for up to 10ms, then mask the result to get the ASCII character code.
-            if key==ord('c'):
-                angles={
-                    "index":int(index_angle),
-                    "middle":int(middle_angle),
-                    "ring":int(ring_angle),
-                    "pinky":int(pinky_angle),
-                    "thumb":round(thumb_dist,3)
+            if key == ord('c'):
+                angles = {
+                    "index": int(index_angle),
+                    "middle": int(middle_angle),
+                    "ring": int(ring_angle),
+                    "pinky": int(pinky_angle),
+                    "thumb": round(thumb_dist, 3),
+                    "im_dist": round(im_dist, 3)
                 }
-                print("Captured values:",angles)
+                print("Captured values:", angles)
+
 
         if angles:
             cv2.putText(image,f"Index: {angles['index']}",(30,40),

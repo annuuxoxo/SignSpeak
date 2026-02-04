@@ -103,6 +103,21 @@ letter_ranges = {
     "pinky": (25, 80),
     "thumb": (0.085, 0.30)
     },
+    "M": {
+    "index": (35, 75),
+    "middle": (30, 95),
+    "ring": (25, 80),
+    "pinky": (20,70),
+    "thumb": (0.06, 0.16),
+    "tm_dist":(0.18,0.35)
+    },
+    "N": {
+    "index": (40, 80),
+    "middle": (30, 60),
+    "ring": (50, 95),
+    "pinky": (45, 120),
+    "thumb": (0.085, 0.20)
+    },    
     "O": {
     "index": (75, 120),
     "middle": (70, 115),
@@ -113,7 +128,6 @@ letter_ranges = {
     }
 
 }
-
 
 cap = cv2.VideoCapture(0)
 
@@ -176,12 +190,12 @@ with mp_hands.Hands(
 
                 thumb_tip = np.array([lm[4].x, lm[4].y, lm[4].z])
                 index_tip = np.array([lm[8].x, lm[8].y, lm[8].z])
-                thumb_tip = np.array([lm[4].x, lm[4].y, lm[4].z])
                 index_mcp = np.array([lm[5].x, lm[5].y, lm[5].z])
+                middle_tip = np.array([lm[12].x, lm[12].y, lm[12].z])
                 ti_dist = get_distance(thumb_tip, index_tip)
+                tm_dist = get_distance(thumb_tip, middle_tip)
                 thumb_dist = get_distance(thumb_tip, index_mcp)
                 thumb_dx = lm[4].x - lm[5].x
-
 
                 index_dx = lm[8].x - lm[5].x   #for distinguishing horizontal and vertical direction
                 index_dy = lm[8].y - lm[5].y
@@ -199,13 +213,17 @@ with mp_hands.Hands(
                     "thumb": round(thumb_dist, 3),
                     "im_dist": round(im_dist, 3),
                     "thumb_dx": round(thumb_dx, 3),
-                    "ti_dist":round(ti_dist, 3)
+                    "ti_dist":round(ti_dist, 3),
+                    "tm_dist":round(tm_dist, 3)
                 }
 
                 prediction = "Unknown"
 
                 for letter, ranges in letter_ranges.items():
-                    if all(in_range(angles[k], *ranges[k]) for k in ranges if k != "dir"):
+                    if all(
+                        in_range(angles[k], *ranges[k])
+                        for k in (ranges.keys() & angles.keys())
+                    ):
                         if "dir" in ranges:
                             if ranges["dir"] == "horizontal" and abs(index_dx) < abs(index_dy):
                                 continue

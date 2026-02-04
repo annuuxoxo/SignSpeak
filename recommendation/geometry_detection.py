@@ -104,14 +104,7 @@ letter_ranges = {
     "pinky": (25, 80),
     "thumb": (0.085, 0.30)
     },
-    "M": { 
-    "index": (80,120),
-    "middle": (110,160),  
-    "ring": (125, 155),  # m and n still need attention
-    "pinky": (130,160),
-    "thumb": (0.08, 0.15),
-    "tm_dist":(0.2,0.48)
-    },
+    
     "N": {
     "index": (40, 80),
     "middle": (30, 60),
@@ -134,6 +127,14 @@ letter_ranges = {
     "pinky": (45, 110),
     "thumb": (0.085, 0.135),
     "im_dist": (0.055, 0.088)
+    },
+    "T": { 
+    "index": (80,120),
+    "middle": (110,160),  
+    "ring": (125, 155), 
+    "pinky": (130,160),
+    "thumb": (0.08, 0.15),
+    "tm_dist":(0.2,0.48)
     },
     "U": {
     "index": (170,180),
@@ -246,11 +247,6 @@ with mp_hands.Hands(
                 index_dx = lm[8].x - lm[5].x   #for distinguishing horizontal and vertical direction
                 index_dy = lm[8].y - lm[5].y
 
-                im_dist = get_distance(
-                 np.array([lm[8].x, lm[8].y, lm[8].z]),
-                 np.array([lm[12].x, lm[12].y, lm[12].z])
-                )
-
                 angles = {
                     "index": int(index_angle),
                     "middle": int(middle_angle),
@@ -260,8 +256,7 @@ with mp_hands.Hands(
                     "im_dist": round(im_dist, 3),
                     "thumb_dx": round(thumb_dx, 3),
                     "ti_dist":round(ti_dist, 3),
-                    "tm_dist":round(tm_dist, 3),
-                    "im_dist":round(im_dist, 3)
+                    "tm_dist":round(tm_dist, 3)
                 }
 
                 prediction = "Unknown"

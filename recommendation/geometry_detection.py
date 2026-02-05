@@ -56,7 +56,7 @@ letter_ranges = {
         "ring": (5,28),
         "pinky": (10,36),
         "thumb": (0.06,0.095),
-        "thumb_dx": (-0.075, -0.02)
+        "thumb_dx": (-0.11, -0.02)
     },
     "F": {
         "index": (58,160),
@@ -105,13 +105,27 @@ letter_ranges = {
     "pinky": (25, 80),
     "thumb": (0.085, 0.30)
     },
-    
-    "N": {
-    "index": (40, 80),
+    "M": {
+    "index": (40, 90),
     "middle": (30, 60),
-    "ring": (50, 95),
-    "pinky": (45, 120),
-    "thumb": (0.085, 0.20)
+    "ring": (20, 50),
+    "thumb": (0.07, 0.18),
+    "tm_dist": (0.01, 0.30),     
+    "ti_dist": (0.04, 0.25),     
+    "thumb_dx": (-0.12, 0.16),
+    "tr_dist": (0.03, 0.155),    
+    "tp_dist": (0.05, 0.30)   
+},
+    "N": {
+    "index": (30, 85),
+    "middle": (20, 70),
+    "ring": (35, 125),
+    "thumb": (0.10, 0.145),
+    "tm_dist": (0.05, 0.16),
+    "ti_dist": (0.07, 0.20),
+    "thumb_dx": (-0.11, 0.08),
+    "tp_dist": (0.15, 0.25),
+    "tr_dist": (0.12, 0.25)
     },    
     "O": {
     "index": (75, 120),
@@ -129,13 +143,27 @@ letter_ranges = {
     "thumb": (0.085, 0.135),
     "im_dist": (0.035, 0.085)
     },
-    "T": { 
-    "index": (80,120),
-    "middle": (110,160),  
-    "ring": (125, 155), 
-    "pinky": (130,160),
-    "thumb": (0.08, 0.15),
-    "tm_dist":(0.2,0.48)
+    "S": {
+    "index": (15, 45),
+    "middle": (10, 30),
+    "ring": (0, 20),
+    "thumb": (0.02, 0.10),
+    "thumb_dx": (-0.075, -0.01),
+    "tm_dist": (0.025, 0.07),
+    "ti_dist": (0.03, 0.09),
+    "tr_dist": (0.04, 0.12),
+    "tp_dist": (0.07, 0.15)
+     },
+    "T": {
+    "index": (35, 55),
+    "middle": (48, 120),
+    "ring": (45, 120),
+    "thumb": (0.085, 0.14),
+    "tm_dist": (0.19, 0.25),
+    "ti_dist": (0.11, 0.16),
+    "thumb_dx": (-0.07, -0.02),
+    "tp_dist": (0.165, 0.25),
+    "tr_dist": (0.18, 0.26)
     },
     "U": {
     "index": (170,180),
@@ -241,8 +269,10 @@ with mp_hands.Hands(
                 index_mcp = np.array([lm[5].x, lm[5].y, lm[5].z])
                 middle_tip = np.array([lm[12].x, lm[12].y, lm[12].z])
                 pinky_tip=np.array([lm[20].x, lm[20].y, lm[20].z])
+                ring_tip=np.array([lm[16].x, lm[16].y, lm[16].z])
                 ti_dist = get_distance(thumb_tip, index_tip)
                 tm_dist = get_distance(thumb_tip, middle_tip)
+                tr_dist=get_distance(thumb_tip,ring_tip)
                 im_dist=get_distance(middle_tip, index_tip)
                 tp_dist=get_distance(thumb_tip, pinky_tip)
                 thumb_dist = get_distance(thumb_tip, index_mcp)
@@ -256,11 +286,12 @@ with mp_hands.Hands(
                     "ring": int(ring_angle),
                     "pinky": int(pinky_angle),
                     "thumb": round(thumb_dist, 3),
-                    "im_dist": round(im_dist, 3),
                     "thumb_dx": round(thumb_dx, 3),
+                    "im_dist": round(im_dist, 3),
                     "ti_dist":round(ti_dist, 3),
                     "tm_dist":round(tm_dist, 3),
-                    "tp_dist":round(tp_dist, 3)
+                    "tp_dist":round(tp_dist, 3),
+                    "tr_dist":round(tr_dist,3)
                 }
 
                 prediction = "Unknown"
